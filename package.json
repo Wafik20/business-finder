@@ -1,0 +1,41 @@
+{
+  "name": "auto-shop-finder",
+  "version": "1.0.0",
+  "description": "A web application to find auto repair and collision shops near a ZIP code with Google Sheets export functionality",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite preview"
+  },
+  "keywords": [
+    "auto-shop",
+    "google-maps",
+    "google-sheets",
+    "api",
+    "search",
+    "business-finder",
+    "zip-code",
+    "export"
+  ],
+  "author": "Auto Shop Finder",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/auto-shop-finder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/auto-shop-finder/issues"
+  },
+  "homepage": "https://github.com/yourusername/auto-shop-finder#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "@googlemaps/places": "^2.0.1"
+  }
+}

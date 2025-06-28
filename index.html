@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Data Collector - Find and Export Business Information</title>
+    <meta name="description" content="Find businesses by location, range, and keyword. Collect contact information including email, phone, and website. Export results to Google Sheets or download as CSV.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-building"></i> Business Data Collector</h1>
+            <p>Find businesses by location, range, and keyword. Collect comprehensive contact information including email, phone, and website data.</p>
+        </header>
+
+        <main>
+            <!-- Search Form -->
+            <section class="search-section">
+                <form id="searchForm" class="search-form">
+                    <div class="form-group">
+                        <label for="country">
+                            <i class="fas fa-globe"></i>
+                            Country
+                        </label>
+                        <select id="country" name="country" required>
+                            <option value="US">🇺🇸 United States</option>
+                            <option value="CA">🇨🇦 Canada</option>
+                            <option value="GB">🇬🇧 United Kingdom</option>
+                            <option value="AU">🇦🇺 Australia</option>
+                            <option value="DE">🇩🇪 Germany</option>
+                            <option value="FR">🇫🇷 France</option>
+                            <option value="IT">🇮🇹 Italy</option>
+                            <option value="ES">🇪🇸 Spain</option>
+                            <option value="NL">🇳🇱 Netherlands</option>
+                            <option value="BE">🇧🇪 Belgium</option>
+                            <option value="CH">🇨🇭 Switzerland</option>
+                            <option value="AT">🇦🇹 Austria</option>
+                            <option value="SE">🇸🇪 Sweden</option>
+                            <option value="NO">🇳🇴 Norway</option>
+                            <option value="DK">🇩🇰 Denmark</option>
+                            <option value="FI">🇫🇮 Finland</option>
+                            <option value="IE">🇮🇪 Ireland</option>
+                            <option value="NZ">🇳🇿 New Zealand</option>
+                            <option value="JP">🇯🇵 Japan</option>
+                            <option value="KR">🇰🇷 South Korea</option>
+                            <option value="SG">🇸🇬 Singapore</option>
+                            <option value="IN">🇮🇳 India</option>
+                            <option value="BR">🇧🇷 Brazil</option>
+                            <option value="MX">🇲🇽 Mexico</option>
+                            <option value="AR">🇦🇷 Argentina</option>
+                            <option value="CL">🇨🇱 Chile</option>
+                            <option value="CO">🇨🇴 Colombia</option>
+                            <option value="PE">🇵🇪 Peru</option>
+                            <option value="ZA">🇿🇦 South Africa</option>
+                            <option value="AE">🇦🇪 United Arab Emirates</option>
+                            <option value="SA">🇸🇦 Saudi Arabia</option>
+                            <option value="IL">🇮🇱 Israel</option>
+                            <option value="TR">🇹🇷 Turkey</option>
+                            <option value="PL">🇵🇱 Poland</option>
+                            <option value="CZ">🇨🇿 Czech Republic</option>
+                            <option value="HU">🇭🇺 Hungary</option>
+                            <option value="RO">🇷🇴 Romania</option>
+                            <option value="BG">🇧🇬 Bulgaria</option>
+                            <option value="HR">🇭🇷 Croatia</option>
+                            <option value="SI">🇸🇮 Slovenia</option>
+                            <option value="SK">🇸🇰 Slovakia</option>
+                            <option value="LT">🇱🇹 Lithuania</option>
+                            <option value="LV">🇱🇻 Latvia</option>
+                            <option value="EE">🇪🇪 Estonia</option>
+                            <option value="PT">🇵🇹 Portugal</option>
+                            <option value="GR">🇬🇷 Greece</option>
+                            <option value="CY">🇨🇾 Cyprus</option>
+                            <option value="MT">🇲🇹 Malta</option>
+                            <option value="LU">🇱🇺 Luxembourg</option>
+                            <option value="IS">🇮🇸 Iceland</option>
+                            <option value="MC">🇲🇨 Monaco</option>
+                            <option value="LI">🇱🇮 Liechtenstein</option>
+                            <option value="AD">🇦🇩 Andorra</option>
+                            <option value="SM">🇸🇲 San Marino</option>
+                            <option value="VA">🇻🇦 Vatican City</option>
+                        </select>
+                        <small class="form-help">Select the country where you want to search for businesses</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Location
+                        </label>
+                        <input 
+                            type="text" 
+                            id="location" 
+                            name="location" 
+                            placeholder="Enter city, state, ZIP code, or address (e.g., New York, NY or 90210)"
+                            required
+                            autocomplete="off"
+                        >
+                        <small class="form-help">Enter any location format: city, state, ZIP code, or full address</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="radius">
+                            <i class="fas fa-ruler"></i>
+                            Search Radius
+                        </label>
+                        <div class="radius-input">
+                            <input 
+                                type="number" 
+                                id="radius" 
+                                name="radius" 
+                                value="10" 
+                                min="1" 
+                                max="31"
+                                required
+                            >
+                            <select id="radiusUnit" name="radiusUnit">
+                                <option value="miles">Miles</option>
+                                <option value="kilometers">Kilometers</option>
+                            </select>
+                        </div>
+                        <small class="form-help">Maximum radius: 31 miles (Google Places API limit)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keyword">
+                            <i class="fas fa-search"></i>
+                            Business Keyword
+                        </label>
+                        <input 
+                            type="text" 
+                            id="keyword" 
+                            name="keyword" 
+                            placeholder="Enter business type or keyword (e.g., Manufacturer, Restaurant, Law Firm)"
+                            required
+                            autocomplete="off"
+                        >
+                        <small class="form-help">Describe the type of business you're looking for</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="maxResults">
+                            <i class="fas fa-list-ol"></i>
+                            Maximum Results
+                        </label>
+                        <input 
+                            type="number" 
+                            id="maxResults" 
+                            name="maxResults" 
+                            value="200" 
+                            min="10" 
+                            required
+                        >
+                        <small class="form-help">Number of businesses to collect (10-10,000)</small>
+                    </div>
+
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> 
+                        <span>Find Businesses</span>
+                    </button>
+                </form>
+
+                <!-- Quick Search & Export Button -->
+                <div class="quick-actions">
+                    <button id="quickSearchExport" class="quick-btn">
+                        <i class="fas fa-bolt"></i>
+                        <span>Quick Search & Export</span>
+                        <small>Search with default settings and export immediately</small>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <section id="loadingSection" class="loading-section hidden">
+                <div class="loading-spinner">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <p>Searching for businesses in your area...</p>
+                
+                <!-- Progress Indicator -->
+                <div id="progressContainer" class="progress-container hidden">
+                    <div class="progress-bar">
+                        <div id="progressBar" class="progress-fill"></div>
+                    </div>
+                    <p id="progressText" class="progress-text">Initializing search...</p>
+                    <p id="progressDetails" class="progress-details"></p>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section hidden">
+                <div class="results-header">
+                    <h2>Search Results</h2>
+                    <div class="results-actions">
+                        <button id="exportToSheets" class="btn btn-primary">
+                            <i class="fab fa-google"></i> Export to Google Sheets
+                        </button>
+                        <button id="downloadCSV" class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Download CSV
+                        </button>
+                    </div>
+                </div>
+
+                <div class="results-info">
+                    <p id="resultsCount"></p>
+                </div>
+
+                <div id="resultsList" class="results-list">
+                    <!-- Results will be populated here -->
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section id="errorSection" class="error-section hidden">
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Oops! Something went wrong</h3>
+                    <p id="errorText"></p>
+                    <button id="retryBtn" class="btn btn-primary">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Google Sheets Modal -->
+        <div id="sheetsModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fab fa-google"></i> Export to Google Sheets</h3>
+                    <button id="closeModal" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="sheets-options">
+                        <div class="option-group">
+                            <label>
+                                <input type="radio" name="sheetsOption" value="new" checked>
+                                <i class="fas fa-plus-circle"></i>
+                                Create new spreadsheet
+                            </label>
+                        </div>
+                        <div class="option-group">
+                            <label>
+                                <input type="radio" name="sheetsOption" value="existing">
+                                <i class="fas fa-edit"></i>
+                                Append to existing spreadsheet
+                            </label>
+                            <input 
+                                type="text" 
+                                id="existingSheetId" 
+                                placeholder="Enter Google Sheets URL or ID"
+                                class="sheet-id-input"
+                            >
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="exportBtn" class="btn btn-primary">
+                            <i class="fab fa-google"></i> Export Now
+                        </button>
+                        <button id="cancelBtn" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="script.js"></script>
+</body>
+</html> 
